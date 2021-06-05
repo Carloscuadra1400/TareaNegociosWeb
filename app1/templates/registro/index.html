@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+<!--Tabla-->
+{% block container %}
+<div class="row mt-5">
+    <!--Tabla-->
+    <div class="col-9 ">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Monto</th>
+                    <th>Tasa</th>
+                    <th>Cantidad de años</th>
+                    <th>Cuota mensual</th>
+                    <th>Total a pagar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in calculos %}
+                    <tr>
+                        <td>{{c.monto}}</td>
+                        <td>{{c.tasa}}%</td>
+                        <td>{{c.anio}}</td>
+                        <td>{{c.cuota}}</td>
+                        <td>{{c.total}}</td>
+                    </tr>
+                
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!--Form -->
+    <div class="col-3 ">
+        <form method="post" >
+        {% csrf_token %}
+            <div class="mb-3">
+                <label for="monto" class="form-label">Monto</label>
+                <input type="text" class="form-control" name="monto" id="monto">
+            </div>
+            <div class="mb-3">
+                <label for="tasa" class="form-label">Tasa de interes</label>
+                <input type="text" class="form-control" name="tasa" id="tasa">
+            </div>
+            <div class="mb-3">
+                <label for="anio" class="form-label">Años</label>
+                <input type="text" class="form-control" name="año" id="anio">
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-lg btn-primary">Calcular</button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+{% endblock container %}
